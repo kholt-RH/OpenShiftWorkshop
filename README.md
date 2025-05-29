@@ -74,19 +74,22 @@ Back here on the Topology view, we can see the build is complete and we have an 
 
 **Deployment Details**
 [click app, name at top]
-
+![image](images/image6.png)
 
 
 Now let’s take a look at OpenShift’s deployment strategy feature. A deployment strategy is a way to change or upgrade an application. The aim here is to make the change without downtime in a way that the user barely notices when the improvements are pushed. There are a number of strategies that can be used, but today we’ll first look at the Rolling strategy which is the default strategy commonly used.
 
 As you can see our current update strategy is currently set to rollingupdate [highlight on screen] We can now scale this application up to 10 pods. 
-Manual Scale Up & Update Strategy
+
+**Manual Scale Up & Update Strategy**
+
+![image](images/image7.png)
 
 The rolling deployment we just saw slowly replaced instances of the previous version of our application with instances of the new version of the application. This deployment waits for new pods to become ready via a readiness check before scaling down the old components. If a significant issue occurs, the rolling deployment can be aborted.
 
 As you all saw, this is quick and easy to do with just a click of a button to scale up or scale down your pods.
 
-	Environment Variables
+**Environment Variables**
 
 There are a number of ways to trigger an application update such as executing a new build, or updating a tag in the container image registry. Because container images are designed to be immutable, one way to provide dynamic configuration is through environment variables. Today we’re going to trigger the application redeployment by just simply injecting some environment variables into the application image. On this [environment] tab here, we’re just going to create a new environment variable for our application and click save. When we do, I will quickly switch back to the details view and we’ll be able to observe OpenShift rolling out the new changes. [Switch to details view quickly] 
 	
