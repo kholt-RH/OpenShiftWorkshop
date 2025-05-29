@@ -20,57 +20,62 @@ In a multi-tenant environment, a Kubernetes namespace provides a mechanism to sc
 
 Projects have role based access controls and users must be given access and permissions to projects by administrators. For example, developers get edit access while testers get read only access. There are two types of RBAC roles and bindings that control authorization (Cluster & Local RBAC). Admins utilize cluster roles and bindings to control who has various access levels to the OCP platform itself and all projects within it. Your developers use local roles and bindings to control who has access to their project.
 
-	Developer Catalog
+**Developer Catalog**
+
 ![third image](images/image3.png)
 Now, when it comes to running workloads on OpenShift, there are a number of ways to do this, but let’s take a look at a couple of the most popular. We will start with the Developer Catalog [Add, Developer Catalog (All services)
 
 The Developer Catalog contains a collection of ready to run application components or application builders you can add to your project that allows you to quickly start building. This repository contains the building blocks that simplify the development process and enables developers to quickly create & deploy applications on OpenShift. 
 These include Red Hat created, as well as components from Red Hat’s large ecosystem of communities and enterprise partners. Now here, Developers can pick & choose from these components and easily integrate them into their application without worrying about the complex setup and configuration. Cluster administrators can also customize the content made available in the catalog to ensure only authorized components get used on clusters. [click on languages filter on left] For example say .NET programming language doesn’t play nicely within the rest of your environment. Your admin can filter out this language from OCP all together so developers never see it as an option.
-	Application Source-to-Image
+
+**Application Source-to-Image**
+
 ![image 4](images/image4.png)
 https://github.com/openshift-roadshow/parksmap-web.git 
 Now, as you see in the developer catalog, there are lots of ways to get a workload running on OpenShift- but lets look at it from the most basic developer level [click +Add, click Import from Git]- I have source code that I’ve written and I want to compile and run my application. [show github tab]. I am going to copy this source code from github, and paste it here into my OpenShift console. 
 
 What we are seeing here is Source-to-Image. (or S2i for short) this is a toolkit and workflow for building reproducible ready-to-run images without a developer needing to know anything about how to create containers - allowing developers to simply focus on writing their application code like you saw in github. In this case, we’re going to simply point the S2I at a github repository where our parksmap application code is stored. [Paste github link] As you can see, S2I is able to detect the type of application from the source code and selects the appropriate builder image. [import github, leave defaults] As you can see here OCP was able to detect this source code as using Dockfiles and suggest we use this to build our image. 
 
-	
 
+**Topology View & Builds**
 
-
-Topology View & Builds
 ![fifth image](images/image5.png)
 
 After we start the build of the application, the console switches to the Topology view. This view provides a visual representation of all the applications within a project, their build status, and the components and services associated with them. In our case, we have a single component, but in more complex scenarios you’d be able to see many different components and their relationships; for example, if we had an application with a backend database and a front end application we would see those two components here in this view. From here we can get additional information about our application- in our case let’s take a look at the build progress. 
 
 Here we can see the log file output from the S2I builder image- pulling source code, compiling, packaging with runtime container images from the local and official Red Hat container registry. Once the build is complete, our new application image is stored in the OpenShift registry and deployed to our project.
 
-*** Since the build can take up to a minute to complete,  lets use this time to talk about Operators in OCP *** [Switch to Admin view, Operators, OperatorHub]
-An Operator is just a Pod that does something in a reliable, repeatable, and observable way. They act like an extension of the Kubernetes and OpenShift API and allow you to manage new resource types. 
+*** Since the build can take up to a minute to complete,  lets use this time to talk about Operators in OCP *** 
 
+[Switch to Admin view, Operators, OperatorHub]
+
+An Operator is just a Pod that does something in a reliable, repeatable, and observable way. They act like an extension of the Kubernetes and OpenShift API and allow you to manage new resource types. 
 
 Instead of installing and managing another piece of software, Operators watch over your OpenShift environment and use its current state to make decisions in real time. You can think of Operators as the runtime that manages a specific type of application on Kubernetes.
 
+Operators automate actions usually performed manually, reducing the chances for errors and simplifying complexity. 
 
-Operators automate actions usually performed manually, reducing the chances for errors and simplifying complexity. 	
-You can see here that we provide a large variety of operators within OpenShift, ranging from database operators to streaming & messaging operators. Now, these operators are broken into Sources (we have 4 of them [highlight source])
-
-
+You can see here that we provide a large variety of operators within OpenShift, ranging from database operators to streaming & messaging operators. Now, these operators are broken into Sources (we have 4 of them.
 
 
-Red Hat: Red Hat Operators are operators developed and maintained by Red Hat. These operators are designed to work seamlessly with Red Hat products and provide additional capabilities and integrations for managing various components of the OpenShift platform or Red Hat ecosystem.
-Certified: Certified Operators are thoroughly tested, verified, and supported by both Red Hat and the independent software vendor (ISV). They undergo a rigorous certification process to ensure compatibility, reliability, and security. Certified Operators offer a higher level of assurance and are recommended for production deployments.
-Community: Community Operators are developed and maintained by the open-source community. These operators may not have the same level of testing and support as Certified Operators, but they are actively maintained and provide valuable functionality. Giving you flexibility and a wide range of choices when it comes to integration.
-Marketplace: Market place operators are operators that come from vendors but come at a cost to you to utilize. 
+**Red Hat**: Red Hat Operators are operators developed and maintained by Red Hat. These operators are designed to work seamlessly with Red Hat products and provide additional capabilities and integrations for managing various components of the OpenShift platform or Red Hat ecosystem.
+**Certified**: Certified Operators are thoroughly tested, verified, and supported by both Red Hat and the independent software vendor (ISV). They undergo a rigorous certification process to ensure compatibility, reliability, and security. Certified Operators offer a higher level of assurance and are recommended for production deployments.
+**Community**: Community Operators are developed and maintained by the open-source community. These operators may not have the same level of testing and support as Certified Operators, but they are actively maintained and provide valuable functionality. Giving you flexibility and a wide range of choices when it comes to integration.
+**Marketplace**: Market place operators are operators that come from vendors but come at a cost to you to utilize. 
 
 Lets circle back to our developer view and check to see if our application is finished building and deploying [switch to Developer view]
-Application Deployed
+
+**Application Deployed**
 
 Back here on the Topology view, we can see the build is complete and we have an instance of our application running. Lets launch our application to verify it is working. 
 
 
-Application Rolling Update
-	Deployment Details
+**Application Rolling Update**
+
+**Deployment Details**
 [click app, name at top]
+
+
 
 Now let’s take a look at OpenShift’s deployment strategy feature. A deployment strategy is a way to change or upgrade an application. The aim here is to make the change without downtime in a way that the user barely notices when the improvements are pushed. There are a number of strategies that can be used, but today we’ll first look at the Rolling strategy which is the default strategy commonly used.
 
