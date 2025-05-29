@@ -15,18 +15,19 @@ In a multi-tenant environment, a Kubernetes namespace provides a mechanism to sc
 
 [click on Project tab] Now once we’ve created our project, lets view it and talk to some functionality you are provided here in the OpenShift console.
 	Project Overview
+ ![second image](images/image2.png)
 
 
 Projects have role based access controls and users must be given access and permissions to projects by administrators. For example, developers get edit access while testers get read only access. There are two types of RBAC roles and bindings that control authorization (Cluster & Local RBAC). Admins utilize cluster roles and bindings to control who has various access levels to the OCP platform itself and all projects within it. Your developers use local roles and bindings to control who has access to their project.
 
 	Developer Catalog
-
+![third image](images/image3.png)
 Now, when it comes to running workloads on OpenShift, there are a number of ways to do this, but let’s take a look at a couple of the most popular. We will start with the Developer Catalog [Add, Developer Catalog (All services)
 
 The Developer Catalog contains a collection of ready to run application components or application builders you can add to your project that allows you to quickly start building. This repository contains the building blocks that simplify the development process and enables developers to quickly create & deploy applications on OpenShift. 
 These include Red Hat created, as well as components from Red Hat’s large ecosystem of communities and enterprise partners. Now here, Developers can pick & choose from these components and easily integrate them into their application without worrying about the complex setup and configuration. Cluster administrators can also customize the content made available in the catalog to ensure only authorized components get used on clusters. [click on languages filter on left] For example say .NET programming language doesn’t play nicely within the rest of your environment. Your admin can filter out this language from OCP all together so developers never see it as an option.
 	Application Source-to-Image
-
+![image 4](images/image4.png)
 https://github.com/openshift-roadshow/parksmap-web.git 
 Now, as you see in the developer catalog, there are lots of ways to get a workload running on OpenShift- but lets look at it from the most basic developer level [click +Add, click Import from Git]- I have source code that I’ve written and I want to compile and run my application. [show github tab]. I am going to copy this source code from github, and paste it here into my OpenShift console. 
 
@@ -37,6 +38,7 @@ What we are seeing here is Source-to-Image. (or S2i for short) this is a toolkit
 
 
 Topology View & Builds
+![fifth image](images/image5.png)
 
 After we start the build of the application, the console switches to the Topology view. This view provides a visual representation of all the applications within a project, their build status, and the components and services associated with them. In our case, we have a single component, but in more complex scenarios you’d be able to see many different components and their relationships; for example, if we had an application with a backend database and a front end application we would see those two components here in this view. From here we can get additional information about our application- in our case let’s take a look at the build progress. 
 
