@@ -11,7 +11,7 @@ Let’s start with the developer perspective. Just as with traditional “deskto
 
 In a multi-tenant environment, a Kubernetes namespace provides a mechanism to scope resources in a cluster, and in OpenShift, a project is a Kubernetes namespace with additional annotations that allows a community of users to organize and manage their content in isolation from other communities. So lets go ahead and create a project that we will work within today.
 
-
+![first image](images/image1.png)
 
 [click on Project tab] Now once we’ve created our project, lets view it and talk to some functionality you are provided here in the OpenShift console.
 	Project Overview
