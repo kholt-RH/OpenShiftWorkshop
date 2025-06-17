@@ -3,22 +3,22 @@
 OpenShift Console
 Red Hat OpenShift as an application platform helps customers focus on improving application development and delivery, securely at scale, by bringing development, operations, and security teams together on a single platform and reducing the complexities associated with modern application architectures and hybrid cloud infrastructures.
 
-Today I wanted to walk you through a few of what I call “quality of life” features of the platform for both developers and administrators - the things that help these roles get their jobs done and as a result drives better business outcomes.
+Today I wanted to walk you through a few of what we call “quality of life” features of the platform for both developers and administrators - the things that help these roles get their jobs done and as a result drives better business outcomes.
 
 Build & Deploy Application (Developer View)
 	Create Project (Parksmap-Web)
-Let’s start with the developer perspective. Just as with traditional “desktop” based development- I need a way to organize my applications, configurations, dependencies, etc.
+Let’s start with the developer perspective. Just as with traditional “desktop” based development- We need a way to organize my applications, configurations, dependencies, etc.
 
-In a multi-tenant environment, a Kubernetes namespace provides a mechanism to scope resources in a cluster, and in OpenShift, a project is a Kubernetes namespace with additional annotations that allows a community of users to organize and manage their content in isolation from other communities. So lets go ahead and create a project that we will work within today.
+In a multi-tenant environment, a Kubernetes namespace provides a mechanism to scope resources in a cluster, and in OpenShift, a project is a Kubernetes namespace with additional annotations that allows a community of users to organize and manage their content in isolation from other communities. Lets go ahead and create a project that we will work within today.
 
 ![first image](images/image1.png)
 
-[click on Project tab] Now once we’ve created our project, lets view it and talk to some functionality you are provided here in the OpenShift console.
+[click on Project tab] Now once we’ve created our project, lets view it and talk to some functionality you are provided with in the OpenShift console.
 	Project Overview
  ![second image](images/image2.png)
 
 
-Projects have role based access controls and users must be given access and permissions to projects by administrators. For example, developers get edit access while testers get read only access. There are two types of RBAC roles and bindings that control authorization (Cluster & Local RBAC). Admins utilize cluster roles and bindings to control who has various access levels to the OCP platform itself and all projects within it. Your developers use local roles and bindings to control who has access to their project.
+Projects have role based access controls and users must be given access and permissions to projects by administrators. For example, developers get edit access while testers get read only access. There are two types of RBAC roles and bindings that control authorization (Cluster & Local RBAC). Admins utilize cluster roles and bindings to control who has various access levels to the OCP platform itself and all projects within it. Developers use local roles and bindings to control who has access to their project.
 
 **Developer Catalog**
 
@@ -34,7 +34,7 @@ These include Red Hat created, as well as components from Red Hat’s large ecos
 https://github.com/openshift-roadshow/parksmap-web.git 
 Now, as you see in the developer catalog, there are lots of ways to get a workload running on OpenShift- but lets look at it from the most basic developer level [click +Add, click Import from Git]- I have source code that I’ve written and I want to compile and run my application. [show github tab]. I am going to copy this source code from github, and paste it here into my OpenShift console. 
 
-What we are seeing here is Source-to-Image. (or S2i for short) this is a toolkit and workflow for building reproducible ready-to-run images without a developer needing to know anything about how to create containers - allowing developers to simply focus on writing their application code like you saw in github. In this case, we’re going to simply point the S2I at a github repository where our parksmap application code is stored. [Paste github link] As you can see, S2I is able to detect the type of application from the source code and selects the appropriate builder image. [import github, leave defaults] As you can see here OCP was able to detect this source code as using Dockfiles and suggest we use this to build our image. 
+What we are seeing here is Source-to-Image. (or S2i for short) this is a toolkit and workflow for building reproducible ready-to-run images without a developer needing to know anything about how to create containers - allowing developers to simply focus on writing their application code like you saw in github. In this case, we’re going to simply point the S2I at a github repository where our parksmap application code is stored. [https://github.com/nodeshift-starters/nodejs-rest-http] As you can see, S2I is able to detect the type of application from the source code and selects the appropriate builder image. [import github, leave defaults] As you can see here OCP was able to detect this source code as using Dockfiles and suggest we use this to build our image. 
 
 
 **Topology View & Builds**
@@ -55,7 +55,7 @@ Instead of installing and managing another piece of software, Operators watch ov
 
 Operators automate actions usually performed manually, reducing the chances for errors and simplifying complexity. 
 
-You can see here that we provide a large variety of operators within OpenShift, ranging from database operators to streaming & messaging operators. Now, these operators are broken into Sources (we have 4 of them.
+You can see here that we provide a large variety of operators within OpenShift, ranging from database operators to streaming & messaging operators. Now, these operators are broken into Sources (we have 4 of them.)
 
 
 **Red Hat**: Red Hat Operators are operators developed and maintained by Red Hat. These operators are designed to work seamlessly with Red Hat products and provide additional capabilities and integrations for managing various components of the OpenShift platform or Red Hat ecosystem.
@@ -79,7 +79,7 @@ Back here on the Topology view, we can see the build is complete and we have an 
 
 Now let’s take a look at OpenShift’s deployment strategy feature. A deployment strategy is a way to change or upgrade an application. The aim here is to make the change without downtime in a way that the user barely notices when the improvements are pushed. There are a number of strategies that can be used, but today we’ll first look at the Rolling strategy which is the default strategy commonly used.
 
-As you can see our current update strategy is currently set to rollingupdate [highlight on screen] We can now scale this application up to 10 pods. 
+As you can see our current update strategy is currently set to rollingupdate  We can now scale this application up to 10 pods by clicking the up arrow until it shows 10.  
 
 **Manual Scale Up & Update Strategy**
 
@@ -93,15 +93,15 @@ As you all saw, this is quick and easy to do with just a click of a button to sc
 
 ![image](images/image9.png)
 
-There are a number of ways to trigger an application update such as executing a new build, or updating a tag in the container image registry. Because container images are designed to be immutable, one way to provide dynamic configuration is through environment variables. Today we’re going to trigger the application redeployment by just simply injecting some environment variables into the application image. On this [environment] tab here, we’re just going to create a new environment variable for our application and click save. When we do, I will quickly switch back to the details view and we’ll be able to observe OpenShift rolling out the new changes. [Switch to details view quickly] 
+There are a number of ways to trigger an application update such as executing a new build, or updating a tag in the container image registry. Because container images are designed to be immutable, one way to provide dynamic configuration is through environment variables. Now we’re going to trigger the application redeployment by just simply injecting some environment variables into the application image. On this [environment] tab here, we’re just going to create a new environment variable named "MyVar" with a value of "MyVal" for our application and click save. When we do, quickly switch back to the details view and we’ll be able to observe OpenShift rolling out the new changes. [Switch to details view quickly] 
 	
 **Observe Rolling Update**
 
 ![image](images/image10.png)
 
-And as you can see just like that, OpenShift has scaled up new instances of the application, while scaling down old instances of the application to give us a zero downtime deployment. This happens quickly - which is one reason why containers are so popular for modern applications.. Now there are also more complex route based strategies including A/B or Blue-Green that are supported in OCP as well. But we can surely schedule a follow up call and demo this strategy if it fits your org’s use case. 
+And as you can see just like that, OpenShift has scaled up new instances of the application, while scaling down old instances of the application to give us a zero downtime deployment. This happens quickly - which is one reason why containers are so popular for modern applications. Now there are also more complex route based strategies including A/B or Blue-Green that are supported in OCP as well. 
 
-Before I show you all another way we can scale our application, let me first install an operator which I’ll utilize in the next section and scale down my application [scale down to 1 pod] [Switch to Admin View, Operators, OperatorHub, search ‘web terminal’, install] One thing I would like to point out here with Operators is how OpenShift will automatically install any dependencies needed for your chosen operator. As we can see, DevWorkspace Operator has been installed prior to our web terminal operator. Now that our operator has been installed, lets refresh our window for it to be applied to our console.
+Before we dive into another way we can scale our application, let's first install an operator which we’ll utilize in the next section and scale down our application [scale down to 1 pod] [Switch to Admin View, Operators, OperatorHub, search ‘web terminal’, install] One thing to point out here with Operators is how OpenShift will automatically install any dependencies needed for your chosen operator. As we can see, DevWorkspace Operator has been installed prior to our web terminal operator. Now that our operator has been installed, lets refresh our window for it to be applied to our console.
 
 **Application Scaling**
 
@@ -109,8 +109,7 @@ Before I show you all another way we can scale our application, let me first ins
 
 ![image](images/image11.png)
 
-One major benefit to containerizing is the ability to scale horizontally (like mentioned in my presentation) This is going to allow you to meet high workload demands ensuring high availability for your application. 
-Autoscaling is a wonderful feature for enabling the automatic scaling of workloads based on demand - to scale up to meet spikes and scale down to free resources when not needed. This is going to be critical for businesses trying to optimize their costs. 
+One major benefit to containerizing is the ability to scale horizontally. This is going to allow you to meet high workload demands ensuring high availability for your application. Autoscaling is a wonderful feature for enabling the automatic scaling of workloads based on demand - to scale up to meet spikes and scale down to free resources when not needed. This is going to be critical for businesses trying to optimize their costs. 
 
 In order to do this, first we’ll need to set some resource limits for our application. [click on app, details, actions, edit resource limits] In a multi-tenant environment, a critical feature is having the ability to enforce boundaries to ensure applications don’t adversely impact others or prevent runaway costs from unexpected consumption. Let’s set some thresholds for CPU and memory usage for running pods. 
 
@@ -123,7 +122,7 @@ In order to do this, first we’ll need to set some resource limits for our appl
 
 Now that we have the resource limits set for our application pods, we can set a minimum and maximum number of pods we want as well as the CPU and memory consumption triggers. 
 [details, actions, Add HorizontalPodAutoscaler]
-Today I’m going to set these really low to show how this works, but in reality you’d probably set these at something like 80% or whatever your preferred utilization metric is.
+Today we're going to set these really low to show how this works, but in reality you’d probably set these at something like 80% or whatever your preferred utilization metric is.
 
 **Autoscaled Application**
 
@@ -131,7 +130,7 @@ Today I’m going to set these really low to show how this works, but in reality
 
 *** NOTE: with thresholds so low, you will likely see pods autoscaling immediately, however, we will also use the web terminal operator to run a few curl commands to the application url ***
 curl https://parksmap-web-git-demo.apps.cluster-j4x6f.j4x6f.sandbox500.opentlc.com/[1-5]
-Ok after setting this, we can see here in the deployment details the pod autoscaler is starting new pods in accordance with our set thresholds. With realistic thresholds, when the load subsides, the autoscaler will start reducing the number of pods to match the lower demand, freeing up resources. [remove horizontal autoscaling]
+After setting this, we can see here in the deployment details the pod autoscaler is starting new pods in accordance with our set thresholds. With realistic thresholds, when the load subsides, the autoscaler will start reducing the number of pods to match the lower demand, freeing up resources. [remove horizontal autoscaling]
 
 **User Experience**
 
@@ -145,14 +144,14 @@ Now let’s explore some of the other features of the developer console that imp
 
 ![image](images/image16.png)
 
-While the console is very useful for fundamental developer activities, when it comes to running production systems, you’re likely to implement things like Infrastructure as Code (IaaC). The nice thing about the console is that it also gives you easy access to the underlying configurations for all of the key components of your deployments so you don’t have to figure out how to write these by hand. And these are reflected in real time, so if we go back to our details view and scale up the number of Pods running our application and come back to our YAML configuration we can see the replicas count has increased and vice versa. [show changing replicas in YAML, switch to details] These configurations can be saved to git repositories and used to programmatically deploy our applications.
+While the console is very useful for fundamental developer activities, when it comes to running production systems, you’re likely to implement things like Infrastructure as Code (IaaC). The nice thing about the console is that it also gives you easy access to the underlying configurations for all of the key components of your deployments so you don’t have to figure out how to write these by hand. These are reflected in real time, so if we go back to our details view and scale up the number of Pods running our application and come back to our YAML configuration we can see the replicas count has increased and vice versa. These configurations can be saved to git repositories and used to programmatically deploy applications.
 
 **Pods**
 
 ![image](images/image17.png)
 
 Under this view here, we can also look at the Pods (or instances) of the application that are currently deployed
-	1. Here we can see pod details like it’s status, the node it’s running on, it’s internal IP addr [click manage columns next to search, add IP address], any storage mounts, etc
+	1. Here we can see pod details like it’s status, the node it’s running on, it’s internal IP address, any storage mounts, etc
 	2. We can also get some quick look metrics on CPU, memory, network utilization.  If we dive into one of these running pods, we can… [click on pod, click logs] 
 	3. Take a live look at the log files for that application to look for error or debug statements
 	4. And we can even open a live terminal in the running pod if we needed to conduct deeper activities like looking at environment variables [run ‘env’ command] or running utility scripts
@@ -161,9 +160,9 @@ Under this view here, we can also look at the Pods (or instances) of the applica
 
 ![image](images/image18.png)
 
-Now switching context to an Administrator perspective, I wanted to take some time to show you just a few elements of the console that improve quality of life for those who are responsible for operating the core platform and the applications running on it.
+Now switching context to an Administrator perspective, let's take some time to look at a few elements of the console that improve quality of life for those who are responsible for operating the core platform and the applications running on it.
 
-Here the administrator console, as previously mentioned,  deploys, configures and manages core infrastructure of the platform for things like storage, network, compute, etc. simplifying monitoring and managing the overall cluster.
+Here the administrator console, as previously mentioned, deploys, configures and manages core infrastructure of the platform for things like storage, network, compute, etc. simplifying monitoring and managing the overall cluster.
 
 **Dashboard - Cluster**
 
@@ -175,13 +174,13 @@ Administrators also have access to a preconfigured, and self-updating monitoring
 
 ![image](images/image20.png)
 
-Additionally, administrators can enable monitoring for user-defined projects (such as the project we created earlier) with options for both project and application level metrics. [change dashboard to ‘Kubernetes/Computer Resources/Namespace(pods), change namespace to “demo”This gives real-time insights to specific application performance, as we can see here we are seeing performance metrics for our parksmap application we deployed earlier. 
+Additionally, administrators can enable monitoring for user-defined projects (such as the project we created earlier) with options for both project and application level metrics. [change dashboard to ‘Kubernetes/Computer Resources/Namespace(pods), change namespace to “demo”. This gives real-time insights to specific application performance, as we can see here we are seeing performance metrics for our parksmap application we deployed earlier. 
 
 **Alerting**
 
 ![image](images/image21.png)
 
-And because hybrid cloud environments can be complex with many varied workloads, alerting is a feature that helps administrators find the signal in the noise to make sure any issues are identified rapidly. Alerts can be viewed in the Alerting UI in the web console or routed to receivers using things like PagerDuty, Email, Slack, etc enabling you to send timely notifications to the appropriate teams when alert conditions occur.
+And because hybrid cloud environments can be complex with many varied workloads, alerting is a feature that helps administrators find the signal in the noise to make sure any issues are identified rapidly. Alerts can be viewed in the Alerting UI in the web console or routed to receivers using things like PagerDuty, Email, Slack, etc., enabling you to send timely notifications to the appropriate teams when alert conditions occur.
 	
 **Cost Management**
 
@@ -198,11 +197,9 @@ Finally today, we'll look at a feature we’ve seen a lot of demand for from cus
 
 ![image](images/image23.png)
 
-https://github.com/mattzager/nodejs-rest-http.git
-
 Next we'd like to show you how OpenShift can help development and operations teams with Blue-Green deployments. Blue-green deployments involve running two versions of an application at the same time and moving traffic from the in-production version (the blue version) to the newer version (the green version).
 
-So the first thing we’ll do is deploy 2 versions of our application, a blue version and a green version. To do this we’ll make use of 2 different branches in our github repository. First I’ll deploy the blue branch. And note that I am unselecting the Create a route option- this means I do not want a public route for this service, it will only be reachable within the OpenShift cluster - and I’ll talk a little more about this in a minute.
+So the first thing we’ll do is deploy 2 versions of our application, a blue version and a green version. To do this we’ll make use of 2 different branches in our github repository. First I’ll deploy the blue branch using the code from this repo, https://github.com/mattzager/nodejs-rest-http.git. Note that you need to unselect the Create a route option- this means we do not want a public route for this service, it will only be reachable within the OpenShift cluster - and we’ll talk a little more about this in a minute.
 
 **Deploy Application - Green**
 
@@ -210,15 +207,15 @@ So the first thing we’ll do is deploy 2 versions of our application, a blue ve
 
 *** NOTE: create the green application right after the blue one- don’t wait for the blue to build ***
 
-And here I’ll deploy the green branch.
+And here we’ll deploy the green branch. Use the same repo to build the green version.
 
 **Applications Deployed**
 
 ![image](images/image25.png)
 
-While the applications are building and deploying, let’s talk about how this will work. Each application has an associated Service. a Service is a method for exposing a network application that is running as one or more Pods in your cluster. The service abstracts request routing so as pods are created and destroyed or multiple pods are deployed for a single application, it is able to automatically connect to the correct pod instances. This is for internal communications. There is also the concept of a Route, a Route is able to expose an internal Service to external clients. So if we look at the original application we built and deployed the URL in my browser is the entry point of the Route from outside to inside the OpenShift cluster.
+While the applications are building and deploying, let’s talk about how this will work. Each application has an associated Service. a Service is a method for exposing a network application that is running as one or more Pods in your cluster. The service abstracts request routing so as pods are created and destroyed or multiple pods are deployed for a single application, it is able to automatically connect to the correct pod instances. This is for internal communications. There is also the concept of a Route, a Route is able to expose an internal Service to external clients. Looking at the original app we built and deployed, the URL in your browser is the Route’s entry point into the OpenShift cluster from the outside.
 
-The reason we deployed our Blue and Green applications without Routes was because we don’t want external users to be able to access them until we are ready. So we can use the internal service endpoints to do internal testing and validation and once we are ready make it the new production application.
+The reason we deployed our Blue and Green applications without Routes was because we don’t want external users to be able to access them until we are ready. We can use the internal service endpoints to do internal testing and validation and once we are ready, we can make it the new production application.
 	
 **View Route Details**
 
@@ -230,7 +227,7 @@ Let’s take a look at the Route associated with our original application.
 
 ![image](images/image27.png)
 
-Here we can see the configuration of the route including what service it is currently associated with. If we edit the route, we can change which Service the route is associated with, so let me update this to our new Blue service.
+Here we can see the configuration of the route including what service it is currently associated with. If we edit the route, we can change which Service the route is associated with, so let's update this to our new Blue service.
 	
 **View Application - Blue**
 
@@ -248,5 +245,6 @@ Let's update this to our new Green service.
 
 ![image](images/image30.png)
 
-I’ll enter a name here and Invoke- and we see my new output from my Green service. This is one example of how OpenShift makes it very easy for development and operations teams to perform sophisticated deployments of their applications.
+We’ll enter a name here and Invoke- and we see the new output from our Green service. This is one example of how OpenShift makes it very easy for development and operations teams to perform sophisticated deployments of their applications.
 
+This completes the OpenShift Workshop for today. We will now continue onto the OpenShift Virtualization workshop. If you are finished before everyone else, please hang out, ask questions, help colleagues, etc. 
